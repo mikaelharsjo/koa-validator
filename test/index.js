@@ -95,5 +95,18 @@ describe('koa-validator()', function(){
 			 	.get('/test?param1=&param2=123&param3=something')
 			 	.end(done);
 		});
+
+		it('supports notEmpty', function(done){
+			app.use(function *(next){
+				this.checkQuery('param1', 'Empty').notEmpty();
+				var errors = this.validationErrors();
+				expect(errors.length).to.eql(1);
+				yield next;
+			});
+
+			request(app.listen())
+			 	.get('/test?param1=')
+			 	.end(done);
+		});
 	});
 });
