@@ -83,7 +83,6 @@ describe('koa-validator()', function(){
 
 		it('supports all validators', function(done){
 			app.use(function *(next){
-				//this.checkQuery('param1', 'Empty').notEmpty();
 				this.checkQuery('param2', 'Not alpha').isAlpha();
 				this.checkQuery('param3', 'Not null').isNull();
 				var errors = this.validationErrors();
@@ -108,5 +107,19 @@ describe('koa-validator()', function(){
 			 	.get('/test?param1=')
 			 	.end(done);
 		});
+
+		it('supports chaining', function(done){
+			app.use(function *(next){
+				this.checkQuery('param1', 'Empty').notEmpty().isAlpha()
+				this.checkQuery('param1', 'Empty').isInt().isEmail()
+				var errors = this.validationErrors();
+				expect(errors.length).to.eql(4);
+				yield next;
+			});
+
+			request(app.listen())
+			 	.get('/test?param1=&param2=abc')
+			 	.end(done);			
+		})
 	});
 });
