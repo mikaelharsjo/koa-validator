@@ -24,7 +24,7 @@ describe('koa-validator()', function(){
 			 	.end(done);
 		});
 
-		it('can detect invalid query params', function(done){
+		it('detects invalid query params', function(done){
 			app.use(function *(next){
 				this.checkQuery('getparam', 'Invalid getparam').isInt();
 				var errors = this.validationErrors();
@@ -110,8 +110,8 @@ describe('koa-validator()', function(){
 
 		it('supports chaining', function(done){
 			app.use(function *(next){
-				this.checkQuery('param1', 'Empty').notEmpty().isAlpha()
-				this.checkQuery('param1', 'Empty').isInt().isEmail()
+				this.checkQuery('param1', 'Empty').notEmpty().isAlpha();
+				this.checkQuery('param1', 'Empty').isInt().isEmail();
 				var errors = this.validationErrors();
 				expect(errors.length).to.eql(4);
 				yield next;
@@ -120,6 +120,45 @@ describe('koa-validator()', function(){
 			request(app.listen())
 			 	.get('/test?param1=&param2=abc')
 			 	.end(done);			
-		})
+		});
+	});
+
+	describe('checkParams', function(done){
+		it('is available to middleware downstream', function(done){
+			app.use(function *(next){
+				expect(this.checkParams).to.be.a('function');
+				yield next;
+			});
+
+			request(app.listen())
+			 	.get('/')
+			 	.end(done);
+		});
+
+		it('handles errors', function(done){
+			app.use(function *(next){
+				this.checkParams('urlparam', 'Invalid urlparam').isAlpha();
+				var errors = this.validationErrors();
+				expect(errors.length).to.equal(1);
+				yield next;
+			});
+
+			request(app.listen())
+			 	.get('/test/123')
+			 	.end(done);			
+		});
+
+		it('handles url without params', function(done){
+			app.use(function *(next){
+				this.checkParams('urlparam', '').isAlpha();
+				var errors = this.validationErrors();
+				expect(errors.length).to.equal(1);
+				yield next;
+			});
+
+			request(app.listen())
+			 	.get('/')
+			 	.end(done);			
+		});
 	});
 });
