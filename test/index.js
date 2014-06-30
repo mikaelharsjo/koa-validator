@@ -1,11 +1,12 @@
 var koa = require('koa');
 var router = require('koa-router');
+var bodyParser = require('koa-body-parser');
 var request = require('supertest');
 var expect = require('expect.js');
 var koaValidator = require('../lib');
 var app;
 
-describe('koa-validator()', function(){
+describe('koa-validator', function(){
 	beforeEach(function(done){
 		app = koa();
 		app.use(koaValidator());
@@ -67,7 +68,7 @@ describe('koa-validator()', function(){
 			 	.end(done);
 		});
 
-		it('handles multiple errors', function(done){
+		it('detects multiple errors', function(done){
 			app.use(function *(next){
 				this.checkQuery('param1', 'Valid getparam').isInt();
 				this.checkQuery('param2', 'Not a numeric value').isInt();
@@ -135,7 +136,7 @@ describe('koa-validator()', function(){
 			 	.end(done);
 		});
 
-		it('handles errors', function(done){
+		it('detects errors', function(done){
 			app.use(function *(next){
 				this.checkParams('urlparam', 'Invalid urlparam').isAlpha();
 				var errors = this.validationErrors();
@@ -161,4 +162,22 @@ describe('koa-validator()', function(){
 			 	.end(done);			
 		});
 	});
+
+	describe('checkBody', function(done){
+		it('detects errors', function(done){
+			app.use(bodyParser());
+
+			app.use(function *(next){
+				this.checkBody('postParam', '').isAlpha();
+				var errors = this.validationErrors();
+				expect(errors.length).to.equal(1);
+				yield next;
+			});
+
+			request(app.listen())
+			 	.post('/')
+			 	.send({ postParam: 123 })
+			 	.end(done);			
+		});
+	})
 });
