@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "description": "",
   "scripts": {
-    "test": "test"
+    "test": "mocha test/index.js --harmony-generators --reporter spec"
   },
   "dependencies": {
     "koa": "~0.8.0"
