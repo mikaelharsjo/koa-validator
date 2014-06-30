@@ -1,9 +1,9 @@
 {
-  "name": "koa-experiment",
+  "name": "koa-validator",
   "version": "0.0.0",
-  "description": "",
+  "description": "Middleware for koa.js that validates request body, params and querystring fields.",
   "scripts": {
-    "test": "mocha test/index.js --harmony-generators --reporter spec"
+    "test": "mocha ./test/index.js --harmony-generators --reporter spec"
   },
   "dependencies": {
     "koa": "~0.8.0"
@@ -15,6 +15,6 @@
     "validator": "~3.16.0",
     "jshint": "~2.5.1"
   },
-  "author": "",
+  "author": "Mikael Härsjö",
   "license": "BSD-2-Clause"
 }
