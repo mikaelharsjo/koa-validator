@@ -178,5 +178,5 @@ describe('koa-validator', function(){
 			 	.send({ postParam: 123 })
 			 	.end(done);			
 		});
-	})
+	});
 });

@@ -15,10 +15,10 @@ app.use(function *(next){
 	this.checkBody('postParam', 'Invalid postparam').isAlpha();
 	var errors = this.validationErrors();
 	if (errors) {
-		this.body = errors
+		this.body = errors;
 	}
 	else {
-		this.body = 'No validation errors'
+		this.body = 'No validation errors';
 	}
 
 	yield next;
