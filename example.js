@@ -1,28 +1,16 @@
 var koa = require('koa');
+var koaValidator = require('lib/koa-validator');
 var app = koa();
 
-// x-response-time
-
-app.use(function *(next){
-  var start = new Date();
-  yield next;
-  var ms = new Date() - start;
-  this.set('X-Response-Time', ms + 'ms');
-});
-
-// logger
-
-app.use(function *(next){
-  var start = new Date();
-  yield next;
-  var ms = new Date() - start;
-  console.log('%s %s - %s', this.method, this.url, ms);
-});
-
-// response
+// adding middleware extends Context with validation methods
+app.use(koaValidator());
 
 app.use(function *(){
-  this.body = 'Hello World';
+  this.checkQuery('getparam', 'Invalid getparam').isInt();
+  this.checkParams('urlparam', 'No url param').notEmpty();
+  this.checkBody('postParam', 'Invalid postparam').isAlpha();
+  var errors = this.validationErrors();
+  yield errors if errors
   yield next;
 });
 
