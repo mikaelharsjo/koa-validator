@@ -7,13 +7,12 @@
     "start": "node --harmony ./example.js"
   },
   "dependencies": {
-    "koa": "~0.8.0"
+    "koa": "~0.8.0",
+    "validator": "~3.16.0"
   },
   "devDependencies": {
     "expect.js": "~0.3.1",
     "supertest": "~0.13.0",
-    "koa-router": "~3.1.4",
-    "validator": "~3.16.0",
     "jshint": "~2.5.1",
     "koa-body-parser": "~1.1.0"
   },

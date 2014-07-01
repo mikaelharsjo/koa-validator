@@ -1,6 +1,5 @@
 var koa = require('koa');
 var bodyParser = require('koa-body-parser');
-var router = require('koa-router');
 var koaValidator = require('./lib');
 var app = koa();
 

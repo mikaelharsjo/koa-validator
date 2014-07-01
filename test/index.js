@@ -1,5 +1,4 @@
 var koa = require('koa');
-var router = require('koa-router');
 var bodyParser = require('koa-body-parser');
 var request = require('supertest');
 var expect = require('expect.js');
