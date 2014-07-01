@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "description": "Middleware for koa.js that validates request body, params and querystring fields.",
   "scripts": {
-    "test": "mocha ./test/index.js --harmony-generators --reporter spec"
+    "test": "mocha ./test/index.js --harmony-generators --reporter spec",
+    "start": "node --harmony ./example.js"
   },
   "dependencies": {
     "koa": "~0.8.0"
