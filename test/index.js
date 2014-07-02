@@ -12,10 +12,11 @@ describe('koa-validator', function(){
 		done();
 	});
 
-	describe('checkQuery', function(done){
-		it('is available to middleware downstream', function(done){
+	describe('attaches', function(){
+		it('checkQuery to Context and req', function(done){
 			app.use(function *(next){
 				expect(this.checkQuery).to.be.a('function');
+				expect(this.req.checkQuery).to.be.a('function');
 				yield next;
 			});
 
@@ -24,6 +25,32 @@ describe('koa-validator', function(){
 			 	.end(done);
 		});
 
+		it('checkParams to Context and req', function(done){
+			app.use(function *(next){
+				expect(this.checkParams).to.be.a('function');
+				expect(this.req.checkParams).to.be.a('function');
+				yield next;
+			});
+
+			request(app.listen())
+			 	.get('/')
+			 	.end(done);
+		});
+
+		it('checkBody to Context and req', function(done){
+			app.use(function *(next){
+				expect(this.checkBody).to.be.a('function');
+				expect(this.req.checkBody).to.be.a('function');
+				yield next;
+			});
+
+			request(app.listen())
+			 	.get('/')
+			 	.end(done);
+		});
+	});
+
+	describe('checkQuery', function(done){
 		it('detects invalid query params', function(done){
 			app.use(function *(next){
 				this.checkQuery('getparam', 'Invalid getparam').isInt();
