@@ -27,14 +27,24 @@ This module is heavily inspired by [express-validator](https://github.com/ctavan
     app.listen(3000);
     
 ## Running example
-Clone the Express repo, then install the dev dependencies to install all the example / test suite dependencies
-    $ git clone git://github.com/mikaelharsjo/koa-validator.git --depth 1
-    $ cd koa-validator
-    $ npm install
-    $ npm start
+Clone the repo, install dependencies and start the server
+
+        $ git clone git://github.com/mikaelharsjo/koa-validator.git --depth 1
+        $ cd koa-validator
+        $ npm install
+        $ npm start
+
+Some example urls to try with
+
+        $ curl -d 'postparam=1' http://localhost:3000/test?getparam=1 
+        -> {"urlparam":"test","getparam":"1","postparam":true}
+        
+        $ curl -d 'postparam=1' http://localhost:8888/t1est?getparam=1
+        -> There have been validation errors: 
+        [ { param: 'urlparam', msg: 'Invalid urlparam', value: 't1est' } ]        
 
 ## Running tests
-  $ npm test
+        $ npm test
 
 ## License
 MIT
