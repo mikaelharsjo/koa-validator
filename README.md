@@ -36,12 +36,11 @@ Clone the repo, install dependencies and start the server
 
 Some example urls to try with
 
-        $ curl -d 'postparam=1' http://localhost:3000/test?getparam=1 
-        -> {"urlparam":"test","getparam":"1","postparam":true}
+        $ curl http://localhost:3000/test?getparam=test
+        -> [{"param":"getparam","msg":"Invalid getparam","value":"test"}]
         
-        $ curl -d 'postparam=1' http://localhost:8888/t1est?getparam=1
-        -> There have been validation errors: 
-        [ { param: 'urlparam', msg: 'Invalid urlparam', value: 't1est' } ]        
+        $ curl -d 'postparam=1' http://localhost:3000/test?getparam=1
+        -> [ { param: 'postparam', msg: 'Invalid postparam', value: '1' } ]        
 
 ## Running tests
         $ npm test
