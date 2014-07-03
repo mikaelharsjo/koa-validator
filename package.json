@@ -10,11 +10,12 @@
     "test": "mocha ./test/index.js --harmony-generators --reporter spec",
     "start": "node --harmony ./example.js"
   },
+  "main": "lib/index.js",
   "dependencies": {
-    "koa": "~0.8.0",
     "validator": "~3.16.0"
   },
   "devDependencies": {
+    "koa": "~0.8.0",
     "expect.js": "~0.3.1",
     "supertest": "~0.13.0",
     "jshint": "~2.5.1",
