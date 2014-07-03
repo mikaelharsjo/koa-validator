@@ -1,7 +1,11 @@
 {
   "name": "koa-validator",
-  "version": "0.0.0",
-  "description": "Middleware for koa.js that validates request body, params and querystring fields.",
+  "version": "0.0.1",
+  "description": "Koa.js middleware that adds validation functionality.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mikaelharsjo/koa-validator.git"
+  }
   "scripts": {
     "test": "mocha ./test/index.js --harmony-generators --reporter spec",
     "start": "node --harmony ./example.js"
@@ -17,5 +21,5 @@
     "koa-body-parser": "~1.1.0"
   },
   "author": "Mikael Härsjö",
-  "license": "BSD-2-Clause"
+  "license": "MIT"
 }
