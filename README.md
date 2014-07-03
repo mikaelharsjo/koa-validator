@@ -5,11 +5,13 @@ Koa.js middleware that adds validation functionality.
 
 This module is heavily inspired by [express-validator](https://github.com/ctavan/express-validator). It´s purpose is to extend `Context` with validation methods taken from [validator.js](https://github.com/chriso/validator.js)
 
+## Install
+    npm install koa_validator 
 
 ## Usage
     var koa = require('koa');
     var bodyParser = require('koa-body-parser');
-    var koaValidator = require('koa-validator');
+    var koaValidator = require('koa_validator');
     var app = koa();
     
     app.use(bodyParser());
@@ -34,7 +36,7 @@ Clone the repo, install dependencies and start the server
         $ npm install
         $ npm start
 
-Some example urls to try with
+Some sample urls to try with
 
         $ curl http://localhost:3000/test?getparam=test
         -> [{"param":"getparam","msg":"Invalid getparam","value":"test"}]
