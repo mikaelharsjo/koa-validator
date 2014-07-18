@@ -19,7 +19,8 @@
     "expect.js": "~0.3.1",
     "supertest": "~0.13.0",
     "jshint": "~2.5.1",
-    "koa-body-parser": "~1.1.0"
+    "koa-body-parser": "~1.1.0",
+    "mocha": "~1.20.1"
   },
   "author": "Mikael Härsjö",
   "license": "MIT",
