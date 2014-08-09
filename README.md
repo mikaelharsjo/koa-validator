@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/mikaelharsjo/koa-validator.svg?branch=master)](https://travis-ci.org/mikaelharsjo/koa-validator)
+[ ![Codeship Status for mikaelharsjo/koa-validator](https://www.codeship.io/projects/67fa8600-01e3-0132-196f-6a159f2f8cde/status)](https://www.codeship.io/projects/30243)
 
 koa-validator
 =============
