@@ -26,7 +26,7 @@ This module is heavily inspired by [express-validator](https://github.com/ctavan
     	this.checkParams('urlparam', 'No url param').notEmpty();
     	this.checkBody('postParam', 'Invalid postparam').isAlpha();
     	this.body = this.validationErrors();
-    	yield next
+    	yield next;
     });
     
     app.listen(3000);
