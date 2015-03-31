@@ -146,7 +146,25 @@ describe('koa-validator', function(){
 
 			request(app.listen())
 			 	.get('/test?param1=&param2=abc')
-			 	.end(done);			
+			 	.end(done);
+		});
+
+		it('no repeat errors', function(done){
+			app.use(function *(next){
+				this.checkQuery('paramA', 'Empty').notEmpty();
+				this.checkQuery('paramB', 'Empty').notEmpty();
+				this.checkQuery('paramC', 'Empty').notEmpty();
+				var validate1 = this.validationErrors();
+				var validate2 = this.validationErrors();
+				expect(validate1.length).to.eql(3);
+				expect(validate2.length).to.eql(3);
+
+				yield next;
+			});
+
+			request(app.listen())
+			 	.get('/test?paramA=&paramB=&paramC=')
+			 	.end(done);
 		});
 	});
 
@@ -172,7 +190,7 @@ describe('koa-validator', function(){
 
 			request(app.listen())
 			 	.get('/test/123')
-			 	.end(done);			
+			 	.end(done);
 		});
 
 		it('handles url without params', function(done){
@@ -185,7 +203,7 @@ describe('koa-validator', function(){
 
 			request(app.listen())
 			 	.get('/')
-			 	.end(done);			
+			 	.end(done);
 		});
 	});
 
@@ -203,7 +221,7 @@ describe('koa-validator', function(){
 			request(app.listen())
 			 	.post('/')
 			 	.send({ postParam: 123 })
-			 	.end(done);			
+			 	.end(done);
 		});
 	});
 });
