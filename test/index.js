@@ -149,7 +149,7 @@ describe('koa-validator', function(){
 			 	.end(done);
 		});
 
-		it('no repeat errors', function(done){
+		it('does not repeat errors', function(done){
 			app.use(function *(next){
 				this.checkQuery('paramA', 'Empty').notEmpty();
 				this.checkQuery('paramB', 'Empty').notEmpty();
